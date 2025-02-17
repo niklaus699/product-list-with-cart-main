@@ -1,0 +1,301 @@
+@font-face {
+    font-family: 'redHatBold';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatRegular';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatSemiBold';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatItalic';
+    /* Give your font a name */
+    src: url('./assets/fonts/RedHatText-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHat';
+    /* Give your font a name */
+    src: url('./assets/fonts/RedHatText-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: redHatRegular;
+    min-height: 100vh;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.top-head-text {
+    grid-column: 1 / -1;
+    margin-bottom: 2rem;
+    font-family: redHatBold;
+}
+
+
+/* Desserts Grid */
+
+.desserts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.dessert-card {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.order-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+
+/* Ensure button stays above image */
+
+.inc-dec-btn {
+    position: relative;
+    align-self: center;
+    /* So we can absolutely position icons inside */
+    padding: 0.75rem 2.5rem;
+    /* Extra padding for icons on both sides */
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 26px;
+    /* Your preferred color */
+    cursor: pointer;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 90px;
+    min-width: 120px;
+    transition: all 0.3s ease;
+    z-index: 2;
+    bottom: 33px;
+}
+
+.inc-dec-btn:hover {
+    background-color: orangered;
+    color: white;
+}
+
+
+/* The icons are hidden by default */
+
+.icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    /* Adjust icon size as needed */
+    height: 20px;
+    /* Adjust icon size as needed */
+}
+
+
+/* Show icons only on hover */
+
+.inc-dec-btn:hover .icon {
+    display: block;
+    background-color: orangered;
+    border-radius: 10px;
+    border-color: #eee;
+    border: solid 1px white;
+}
+
+.inc-dec-btn:focus .icon {
+    background-color: #eee;
+    border-radius: 10px;
+    color: orangered;
+}
+
+.inc-dec-btn:hover .btn-text {
+    display: none;
+}
+
+
+/* Position the left icon */
+
+.icon-left {
+    left: 0.5rem;
+}
+
+
+/* Position the right icon */
+
+.icon-right {
+    right: 0.5rem;
+}
+
+
+/* If you want the text always visible, just style .btn-text normally */
+
+.cart-icon {
+    height: 13px;
+}
+
+.order-button:hover {
+    color: orangered;
+    border: solid 0.5px orangered;
+}
+
+.order-info {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    font-family: redHatItalic;
+}
+
+.order-name {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    font-family: redHatSemiBold;
+}
+
+.order-price {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+
+/* Cart Styles */
+
+.cart {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(2px);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.cart h2 {
+    margin-bottom: 1.5rem;
+    color: orangered;
+    font-family: redHatBold;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.cart li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-total {
+    border-top: 2px solid #ddd;
+    padding-top: 1rem;
+}
+
+.confirm-order {
+    background: #2c3e50;
+    color: white;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-family: redHatBold;
+}
+
+.confirm-order:focus {
+    background-color: maroon;
+}
+
+.remove-icon {
+    position: absolute;
+    right: 0.1rem;
+    color: #CAAFA7;
+    border: solid 1px #CAAFA7;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-icon:hover {
+    color: black;
+    border-color: black;
+}
+
+.x-icon {
+    font-family: redHatSemiBold;
+    color: orangered;
+}
+
+.total-amount-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-amount {
+    position: absolute;
+    right: 0.1rem;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+    .desserts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    .cart {
+        order: -1;
+        position: static;
+    }
+    .desserts {
+        grid-template-columns: 1fr;
+    }
+}

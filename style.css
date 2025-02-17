@@ -1,0 +1,179 @@
+@font-face {
+    font-family: 'redHatBold';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatRegular';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatSemiBold';
+    /* Give your font a name */
+    src: url('./assets/fonts/static/RedHatText-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHatItalic';
+    /* Give your font a name */
+    src: url('./assets/fonts/RedHatText-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'redHat';
+    /* Give your font a name */
+    src: url('./assets/fonts/RedHatText-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
+
+.top-head-text {
+    font-family: redHatBold;
+}
+
+
+/* Main layout: desserts on the left, cart on the right */
+
+.main-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    /* Left column 3 parts, right column 1 part */
+    gap: 2rem;
+    /* Space between the two columns */
+    max-width: 1200px;
+    /* Adjust as needed */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    padding: 2rem;
+    /* Some padding around the container */
+}
+
+
+/* Desserts grid container */
+
+.desserts {
+    display: grid;
+    /* This creates responsive columns that fit nicely */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    /* Space between dessert cards */
+}
+
+
+/* Individual dessert card styling */
+
+.dessert-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    /* Center text and image */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* A slight shadow for depth */
+    padding: 1rem;
+}
+
+.order-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.order-name {
+    margin: 0.75rem 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+.order-info {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.order-button {
+    background-color: #b3583d;
+    /* or your preferred color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.order-button:hover {
+    background-color: #913f27;
+    /* Darken on hover */
+}
+
+.order-button:focus {
+    color: ;
+}
+
+
+/* Cart styling */
+
+.cart {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    height: fit-content;
+    /* So it doesn't stretch too tall */
+}
+
+.cart h2 {
+    margin-top: 0;
+}
+
+.cart ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.cart li {
+    margin-bottom: 0.5rem;
+}
+
+.order-total {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.confirm-order {
+    background-color: #b3583d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.confirm-order:hover {
+    background-color: #913f27;
+}
+
+.order-price {
+    font-family: redHat;
+    color: orangered;
+}
