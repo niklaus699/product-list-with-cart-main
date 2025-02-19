@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (cart[itemName].amount == 0) {
             cart[itemName].amount = 0;
+            if (cart[itemName].amount < 1) {
+                delete cart[itemName];
+            }
         } else {
             cart[itemName].amount--;
         }
@@ -126,6 +129,31 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsElement.innerHTML = '';
         let total = 0;
         let totalQuantity = 0;
+        // Update the cart count display in updateCartUI()
+        // Replace the h2 element selection with this:
+        const cartHeader = document.querySelector('.cart h2');
+        cartHeader.innerHTML = `Your Cart (${Object.keys(cart).length})`;
+
+        // Modify the empty cart display logic in updateCartUI()
+        // Add this at the start of updateCartUI():
+        cartItemsElement.innerHTML = ''; // Clear existing items
+
+        if (Object.keys(cart).length === 0) {
+            const emptyCart = document.createElement('div');
+            emptyCart.className = 'empty-cart';
+
+            const emptyImage = document.createElement('img');
+            emptyImage.src = './assets/images/illustration-empty-cart.svg';
+            emptyImage.alt = 'Empty cart';
+
+            const emptyText = document.createElement('h4');
+            emptyText.className = 'order-info';
+            emptyText.textContent = 'Your added items will appear here';
+
+            emptyCart.append(emptyImage, emptyText);
+            cartItemsElement.appendChild(emptyCart);
+            return;
+        }
         for (const [itemName, itemData] of Object.entries(cart)) {
             const itemTotal = itemData.price * itemData.amount;
             console.log(itemData.amount);
@@ -146,6 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
             removeIcon.className = 'remove-icon';
             removeIcon.src = './assets/images/icon-remove-item.svg';
             removeIcon.alt = 'x';
+            removeIcon.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent click bubbling to the button
+                removeItem(itemName);
+            })
 
 
             // Create a paragraph element that would contain details of each order and give it a classname
@@ -170,4 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsElement.appendChild(cartTotalElementDiv);
         }
     }
+
+    const removeItem = (itemName) => {
+        if (cart[itemName]) {
+            delete cart[itemName]; // Remove the item completely from cart
+            updateCartUI();
+        }
+    }
+
 });
