@@ -152,6 +152,20 @@ body {
     display: none;
 }
 
+.inc-dec-btn:hover .cart-icon {
+    display: none;
+}
+
+.inc-dec-btn:hover .order-count {
+    display: block;
+}
+
+.order-count {
+    justify-self: center;
+    font-size: large;
+    display: none;
+}
+
 
 /* Position the left icon */
 
@@ -276,6 +290,11 @@ body {
 .total-amount {
     position: absolute;
     right: 0.1rem;
+}
+
+.notification-container {
+    display: flex;
+    background-color: whitesmoke;
 }
 
 

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create button
         // Create the multi-icon button
-        const incDecBtn = document.createElement('button');
+        const incDecBtn = document.createElement('div');
         incDecBtn.className = 'inc-dec-btn';
 
         const cartIcon = document.createElement('img');
@@ -41,27 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
         textContent.className = 'btn-text';
         textContent.textContent = 'Add to Cart';
 
+        const orderCount = document.createElement('span');
+        orderCount.className = 'order-count';
+        orderCount.textContent = '0';
+
         // Plus icon
         const plusIcon = document.createElement('img');
         plusIcon.src = './assets/images/icon-increment-quantity.svg'; // Change to your path
         plusIcon.alt = '+';
         plusIcon.className = 'icon icon-right';
 
+
         // Append icons + text into the button
         incDecBtn.appendChild(cartIcon);
         incDecBtn.appendChild(minusIcon);
         incDecBtn.appendChild(textContent);
+        incDecBtn.appendChild(orderCount);
         incDecBtn.appendChild(plusIcon);
 
 
         // Add event listeners for increment/decrement
         minusIcon.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent click bubbling to the button
-            decrementItem(dessert);
+            decrementItem(dessert, orderCount);
         });
         plusIcon.addEventListener('click', (e) => {
             e.stopPropagation();
-            incrementItem(dessert);
+            incrementItem(dessert, orderCount);
         });
 
 
@@ -88,7 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTotalElement = document.createElement('h4');
     const cartTotalElementText = document.createElement('h4');
     const cartTotalElementDiv = document.createElement('div');
-    const incrementItem = (dessert) => {
+
+    const orderCount = document.createElement('span');
+    orderCount.className = 'order-count';
+    const incrementItem = (dessert, orderCount) => {
         // Add your cart logic here
         const priceTag = dessert.price;
         const itemName = dessert.name;
@@ -100,11 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             cart[itemName].amount++;
         }
+        orderCount.textContent = `${cart[itemName].amount}`;
+
         updateCartUI()
         console.log('Added to cart:', dessert.name, );
     }
 
-    const decrementItem = (dessert) => {
+    const decrementItem = (dessert, orderCount) => {
         const priceTag = dessert.price;
         const itemName = dessert.name;
         if (!cart[itemName]) {
@@ -121,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             cart[itemName].amount--;
         }
+        orderCount.textContent = `${cart[itemName].amount}`;
         updateCartUI()
         console.log('Added to cart:', dessert.name, );
     }
@@ -132,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update the cart count display in updateCartUI()
         // Replace the h2 element selection with this:
         const cartHeader = document.querySelector('.cart h2');
-        cartHeader.innerHTML = `Your Cart (${Object.keys(cart).length})`;
 
         // Modify the empty cart display logic in updateCartUI()
         // Add this at the start of updateCartUI():
@@ -158,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemTotal = itemData.price * itemData.amount;
             console.log(itemData.amount);
             total += itemTotal;
-            totalQuantity += itemData.quantity;
+            totalQuantity += itemData.amount;
 
             // Create a <li> element to show: Name, Price, Quantity, and Subtotal
             const li = document.createElement('li');
@@ -192,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsElement.appendChild(li);
 
 
+
             // Update total items count and total cost
             cartCountElement.textContent = totalQuantity;
             cartTotalElementText.textContent = 'Order total';
@@ -200,7 +212,22 @@ document.addEventListener('DOMContentLoaded', () => {
             cartTotalElementDiv.className = 'total-amount-container';
             cartTotalElementDiv.append(cartTotalElementText, cartTotalElement);
             cartItemsElement.appendChild(cartTotalElementDiv);
+            cartHeader.innerHTML = `Your Cart (${totalQuantity})`;
         }
+
+        const notificationContainer = document.createElement('div');
+        notificationContainer.className = ('notification-container');
+
+        const notification = document.createElement('span');
+        notification.textContent = 'This is a carbon neutral delivery';
+        notification.className = 'carbon-neutral-text';
+
+        const notificationImage = document.createElement('img');
+        notificationImage.src = './assets/images/icon-carbon-neutral.svg';
+        notificationImage.className = 'carbon-image';
+
+        notificationContainer.append(notificationImage, notification);
+        cartItemsElement.append(notificationContainer);
     }
 
     const removeItem = (itemName) => {
