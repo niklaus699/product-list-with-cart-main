@@ -248,7 +248,7 @@ body {
 }
 
 .confirm-order {
-    background: #2c3e50;
+    background: maroon;
     color: white;
     width: 100%;
     padding: 1rem;
@@ -257,10 +257,6 @@ body {
     cursor: pointer;
     margin-top: 1rem;
     font-family: redHatBold;
-}
-
-.confirm-order:focus {
-    background-color: maroon;
 }
 
 .remove-icon {
@@ -295,6 +291,64 @@ body {
 .notification-container {
     display: flex;
     background-color: whitesmoke;
+}
+
+
+/* Modal overlay covers the entire viewport */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+
+/* Modal container styling */
+
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Styling for the close button */
+
+.modal-close {
+    margin-top: 1rem;
+    background: orangered;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+/* Optional styling for order details */
+
+.order-details-container p,
+.order-summary {
+    margin: 0.5rem 0;
+}
+
+.confirm-header {
+    font-family: redHatBold;
+    font-weight: 800px;
+}
+
+.header-paragraph {
+    font-family: redHatBold;
 }
 
 

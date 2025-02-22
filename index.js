@@ -214,6 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsElement.appendChild(cartTotalElementDiv);
             cartHeader.innerHTML = `Your Cart (${totalQuantity})`;
         }
+        const confirmOrder = document.createElement('button');
+        confirmOrder.textContent = 'Confirm Order';
+        confirmOrder.className = 'confirm-order';
+        confirmOrder.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click bubbling to the button
+            confirmOrd();
+        })
 
         const notificationContainer = document.createElement('div');
         notificationContainer.className = ('notification-container');
@@ -228,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         notificationContainer.append(notificationImage, notification);
         cartItemsElement.append(notificationContainer);
+        cartItemsElement.append(confirmOrder);
     }
 
     const removeItem = (itemName) => {
@@ -236,5 +244,65 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCartUI();
         }
     }
+
+    const confirmOrd = () => {
+        // Create an overlay for the modal popup
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+
+        // Create the modal container
+        const modal = document.createElement('div');
+        modal.className = 'modal-content';
+
+        // Create a header for the modal
+        const header = document.createElement('h2');
+        header.className = 'confirm-header';
+        header.textContent = 'Order Confirmed';
+
+        const headerContent = document.createElement('p');
+        header.className = 'header-paragraph';
+        headerContent.textContent = 'We hope you enjoy your food';
+
+        // Create a container to hold order details
+        const detailsContainer = document.createElement('div');
+        detailsContainer.className = 'order-details-container';
+
+        // Build the order details by iterating over the cart
+        let total = 0;
+        let totalQuantity = 0;
+        for (const [itemName, itemData] of Object.entries(cart)) {
+            const itemTotal = itemData.price * itemData.amount;
+            total += itemTotal;
+            totalQuantity += itemData.amount;
+
+            const orderLine = document.createElement('p');
+            orderLine.textContent = `${itemName} - $${itemData.price.toFixed(2)} x ${itemData.amount} = $${itemTotal.toFixed(2)}`;
+            detailsContainer.appendChild(orderLine);
+        }
+
+        // Create a summary paragraph for the total items and cost
+        const summary = document.createElement('p');
+        summary.className = 'order-summary';
+        summary.textContent = `Total Items: ${totalQuantity} | Total: $${total.toFixed(2)}`;
+
+        // Create a close button to dismiss the modal
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.className = 'modal-close';
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(overlay);
+        });
+
+        // Append header, details, summary, and close button to the modal
+        modal.appendChild(header);
+        modal.appendChild(headerContent);
+        modal.appendChild(detailsContainer);
+        modal.appendChild(summary);
+        modal.appendChild(closeButton);
+
+        // Append the modal to the overlay, then add the overlay to the body
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    };
 
 });
